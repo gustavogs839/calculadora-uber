@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='%23f06292'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0 0 12 2.25Z' /%3E%3C/svg%3E">    
+    
+    <title>Calculadora de Taxas</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --rosa-claro: #ffe4e9;
+            --rosa-medio: #ff85a1;
+            --rosa-forte: #f06292;
+            --texto: #4a4a4a;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--rosa-claro) 0%, #fbc2eb 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: var(--texto);
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            width: 90%;
+            max-width: 350px;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--rosa-forte);
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--rosa-claro);
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--rosa-medio);
+            box-shadow: 0 0 8px rgba(255, 133, 161, 0.3);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: var(--rosa-forte);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
+            box-shadow: 0 4px 15px rgba(240, 98, 146, 0.3);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        #resultadoArea {
+            margin-top: 25px;
+            text-align: center;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .resultado-valor {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--rosa-forte);
+            display: block;
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .show { opacity: 1 !important; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Minha Calculadora</h2>
+    
+    <div class="input-group">
+        <label>Quanto queres receber?</label>
+        <input type="number" id="valorLiquido" placeholder="0,00" step="0.01">
+    </div>
+
+    <div class="input-group">
+        <label>Modo de Pagamento</label>
+        <select id="metodo">
+            <option value="0.0105">Débito Visa e Master (1.05%)</option>
+            <option value="0.0165">Débito Outras Bandeiras (1.65%)</option>
+            <option value="0.0304">Crédito Visa e Master (3.04%)</option>
+            <option value="0.0397">Crédito Outras Bandeiras (3.97%)</option>
+        </select>
+    </div>
+
+    <button onclick="calcular()">Calcular Valor</button>
+
+    <div id="resultadoArea">
+        <span style="font-size: 0.85rem;">Valor a cobrar do cliente:</span>
+        <span id="valorFinal" class="resultado-valor">R$ 0,00</span>
+    </div>
+</div>
+
+<script>
+    function calcular() {
+        const liquido = parseFloat(document.getElementById('valorLiquido').value);
+        const taxa = parseFloat(document.getElementById('metodo').value);
+        const areaRes = document.getElementById('resultadoArea');
+        const campoValor = document.getElementById('valorFinal');
+
+        if (isNaN(liquido) || liquido <= 0) {
+            alert("Por favor, digita um valor válido!");
+            return;
+        }
+
+        // Fórmula: Valor Bruto = Valor Líquido / (1 - Taxa)
+        const bruto = liquido / (1 - taxa);
+
+        // Atualiza o texto e mostra com animação
+        campoValor.innerText = `R$ ${bruto.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        areaRes.classList.add('show');
+    }
+</script>
+
+</body>
+</html>
