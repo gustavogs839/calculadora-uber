@@ -5,97 +5,232 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='%23f06292'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0 0 12 2.25Z' /%3E%3C/svg%3E">    
     
-    <title>Calculadora de Taxas</title>
+    <title>Calculadora de Corridas Particulares</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --rosa-claro: #ffe4e9;
-            --rosa-medio: #ff85a1;
-            --rosa-forte: #f06292;
-            --texto: #4a4a4a;
+            --fundo: #16242b;
+            --painel: #ffffff;
+            --azul-noite: #12232d;
+            --azul-suave: #536771;
+            --verde: #c9ef62;
+            --verde-escuro: #789b21;
+            --linha: #dce4e7;
+            --texto: #18262d;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, var(--rosa-claro) 0%, #fbc2eb 100%);
+            background:
+                linear-gradient(90deg, rgba(9, 22, 28, 0.78) 0%, rgba(9, 22, 28, 0.42) 48%, rgba(9, 22, 28, 0.18) 100%),
+                url('BYD.png') center / cover fixed;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
+            padding: 34px 20px;
+            box-sizing: border-box;
             color: var(--texto);
         }
 
+        body::before {
+            content: 'CORRIDAS PARTICULARES';
+            position: fixed;
+            top: 34px;
+            left: 38px;
+            color: rgba(255, 255, 255, 0.78);
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+        }
+
         .card {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 30px;
-            border-radius: 25px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 1;
+            background: #ffffff !important;
+            isolation: isolate;
+            padding: 0 28px 28px;
+            border-radius: 18px;
+            box-shadow: 0 22px 55px rgba(0, 0, 0, 0.3);
             width: 90%;
-            max-width: 350px;
-            backdrop-filter: blur(10px);
+            max-width: 390px;
+            overflow: hidden;
             animation: fadeIn 0.8s ease-out;
         }
 
-        h2 {
-            text-align: center;
-            color: var(--rosa-forte);
-            margin-bottom: 25px;
+        .cabecalho {
+            background: var(--azul-noite);
+            color: white;
+            margin: 0 -28px 25px;
+            padding: 23px 28px 21px;
+        }
+
+        .cabecalho::after {
+            content: 'RIDE / 01';
+            float: right;
+            margin-top: -20px;
+            color: rgba(255, 255, 255, 0.42);
+            font-size: 0.65rem;
+            letter-spacing: 0.14em;
+        }
+
+        .marca {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            color: var(--verde);
+            font-size: 0.72rem;
             font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .marca::before {
+            content: '';
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--verde);
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 1.45rem;
+            font-weight: 600;
+            letter-spacing: 0;
         }
 
         .input-group {
             margin-bottom: 20px;
         }
 
+        .secao-titulo {
+            margin: 0 0 11px;
+            color: var(--azul-suave);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
         label {
             display: block;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
+            margin-bottom: 7px;
+            color: var(--azul-suave);
+            font-size: 0.78rem;
             font-weight: 400;
         }
 
         input, select {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid var(--rosa-claro);
-            border-radius: 12px;
+            padding: 11px 13px;
+            border: 1px solid var(--linha);
+            border-radius: 9px;
             font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
+            font-size: 0.94rem;
+            color: var(--texto);
+            background: #fbfcfc;
             transition: all 0.3s ease;
             box-sizing: border-box;
             outline: none;
         }
 
         input:focus, select:focus {
-            border-color: var(--rosa-medio);
-            box-shadow: 0 0 8px rgba(255, 133, 161, 0.3);
+            border-color: var(--verde-escuro);
+            box-shadow: 0 0 0 3px rgba(201, 239, 98, 0.25);
+        }
+
+        .horarios {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .resumo-precos {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 2px 0 20px;
+        }
+
+        .preco-item {
+            padding: 11px;
+            border: 1px solid var(--linha);
+            border-radius: 9px;
+            background: #f8faf9;
+        }
+
+        .preco-item label {
+            margin-bottom: 5px;
+            font-size: 0.7rem;
+        }
+
+        .preco-item input {
+            padding: 4px 0;
+            border: 0;
+            border-radius: 0;
+            background: transparent;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .preco-item input:focus {
+            box-shadow: none;
+            border-bottom: 1px solid var(--verde-escuro);
+        }
+
+        .detalhes-calculo {
+            margin-top: 6px;
+            color: var(--azul-suave);
+            font-size: 0.75rem;
         }
 
         button {
             width: 100%;
-            padding: 15px;
-            background: var(--rosa-forte);
-            color: white;
+            padding: 14px;
+            background: var(--azul-noite);
+            color: var(--verde);
             border: none;
-            border-radius: 12px;
-            font-size: 1rem;
+            border-radius: 9px;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
             transition: transform 0.2s, background 0.3s;
-            box-shadow: 0 4px 15px rgba(240, 98, 146, 0.3);
+            box-shadow: 0 5px 12px rgba(18, 35, 45, 0.18);
         }
 
         button:active {
             transform: scale(0.95);
         }
 
+        button:hover {
+            background: #203b49;
+        }
+
+        .botao-recibo {
+            display: none;
+            margin-top: 10px;
+            background: var(--verde);
+            color: var(--azul-noite);
+            box-shadow: none;
+        }
+
+        .botao-recibo:hover {
+            background: #d8f888;
+        }
+
         #resultadoArea {
-            margin-top: 25px;
+            margin-top: 23px;
+            padding-top: 20px;
+            border-top: 1px dashed var(--linha);
             text-align: center;
-            min-height: 80px;
+            min-height: 90px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -104,67 +239,339 @@
         }
 
         .resultado-valor {
-            font-size: 1.8rem;
+            margin-top: 3px;
+            font-size: 2.15rem;
             font-weight: 600;
-            color: var(--rosa-forte);
+            color: var(--azul-noite);
             display: block;
         }
 
         /* Animações */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { transform: translateY(20px); }
+            to { transform: translateY(0); }
         }
 
         .show { opacity: 1 !important; }
+
+        .modal-recibo {
+            position: fixed;
+            inset: 0;
+            z-index: 10;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(18, 35, 45, 0.72);
+        }
+
+        .modal-recibo.aberto {
+            display: flex;
+        }
+
+        .recibo {
+            position: relative;
+            width: min(100%, 360px);
+            padding: 25px 23px 22px;
+            border-radius: 14px;
+            background: var(--painel);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .fechar-recibo {
+            position: absolute;
+            top: 12px;
+            right: 14px;
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            border-radius: 50%;
+            background: #edf1f3;
+            color: var(--azul-noite);
+            font-size: 1.2rem;
+            line-height: 1;
+            box-shadow: none;
+        }
+
+        .fechar-recibo:hover {
+            background: var(--linha);
+        }
+
+        .recibo-topo {
+            padding-bottom: 17px;
+            border-bottom: 1px dashed var(--linha);
+        }
+
+        .recibo-topo .marca {
+            margin-bottom: 7px;
+            color: var(--verde-escuro);
+        }
+
+        .recibo-topo h3 {
+            margin: 0;
+            color: var(--azul-noite);
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .recibo-info {
+            display: grid;
+            gap: 11px;
+            padding: 18px 0;
+        }
+
+        .recibo-linha {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            color: var(--azul-suave);
+            font-size: 0.8rem;
+        }
+
+        .recibo-linha strong {
+            color: var(--texto);
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .recibo-total {
+            padding-top: 17px;
+            border-top: 1px solid var(--linha);
+            text-align: center;
+        }
+
+        .recibo-total span {
+            color: var(--azul-suave);
+            font-size: 0.78rem;
+        }
+
+        .recibo-total strong {
+            display: block;
+            margin-top: 2px;
+            color: var(--azul-noite);
+            font-size: 2.15rem;
+            font-weight: 600;
+        }
+
+        .recibo-aviso {
+            margin: 16px 0 0;
+            color: var(--azul-suave);
+            font-size: 0.68rem;
+            text-align: center;
+        }
+
+        @media (max-width: 420px) {
+            body {
+                min-height: 100vh;
+                padding: 20px 0;
+                background-position: 63% center;
+            }
+
+            body::before {
+                display: none;
+            }
+
+            .card {
+                padding: 0 20px 22px;
+            }
+
+            .cabecalho {
+                margin-left: -20px;
+                margin-right: -20px;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .horarios {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .resumo-precos {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 3px;
+            }
+        }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <h2>Minha Calculadora</h2>
+    <header class="cabecalho">
+        <div class="marca">Serviço particular</div>
+        <h2>Calculadora de corrida</h2>
+    </header>
+
+    <p class="secao-titulo">Dados da corrida</p>
     
     <div class="input-group">
-        <label>Quanto queres receber?</label>
-        <input type="number" id="valorLiquido" placeholder="0,00" step="0.01">
-    </div>
-
-    <div class="input-group">
-        <label>Modo de Pagamento</label>
-        <select id="metodo">
-            <option value="0.0105">Débito Visa e Master (1.05%)</option>
-            <option value="0.0165">Débito Outras Bandeiras (1.65%)</option>
-            <option value="0.0304">Crédito Visa e Master (3.04%)</option>
-            <option value="0.0397">Crédito Outras Bandeiras (3.97%)</option>
+        <label for="tipoCorrida">Tipo de corrida</label>
+        <select id="tipoCorrida" onchange="alternarCampos()">
+            <option value="km">Corrida por quilômetro</option>
+            <option value="hora">Corrida por hora</option>
         </select>
     </div>
 
-    <button onclick="calcular()">Calcular Valor</button>
+    <div class="input-group" id="campoKm">
+        <label for="quilometros">Quilômetros rodados</label>
+        <input type="number" id="quilometros" placeholder="Ex.: 18,5" step="0.1" min="0">
+    </div>
 
-    <div id="resultadoArea">
+    <div class="input-group horario-group" id="camposHorario" hidden>
+        <div class="horarios">
+            <div>
+                <label for="horarioInicio">Horário de início</label>
+                <input type="time" id="horarioInicio">
+            </div>
+            <div>
+                <label for="horarioFim">Horário final</label>
+                <input type="time" id="horarioFim">
+            </div>
+        </div>
+    </div>
+
+    <p class="secao-titulo">Valores da cobrança</p>
+
+    <div class="resumo-precos">
+        <div class="preco-item">
+            <label for="valorInicial">Valor inicial (R$)</label>
+            <input type="number" id="valorInicial" value="10" step="0.01" min="0">
+        </div>
+        <div class="preco-item">
+            <label for="valorVariavel" id="labelValorVariavel">Valor por km (R$)</label>
+            <input type="number" id="valorVariavel" value="2.5" step="0.01" min="0">
+        </div>
+    </div>
+
+    <button onclick="calcular()">Calcular corrida</button>
+
+    <div id="resultadoArea" aria-live="polite">
         <span style="font-size: 0.85rem;">Valor a cobrar do cliente:</span>
         <span id="valorFinal" class="resultado-valor">R$ 0,00</span>
+        <span id="detalhesCalculo" class="detalhes-calculo"></span>
+        <button class="botao-recibo" id="botaoRecibo" onclick="abrirRecibo()">Gerar recibo para o cliente</button>
     </div>
 </div>
 
+<div class="modal-recibo" id="modalRecibo" role="dialog" aria-modal="true" aria-labelledby="tituloRecibo" onclick="fecharRecibo(event)">
+    <article class="recibo" onclick="event.stopPropagation()">
+        <button class="fechar-recibo" aria-label="Fechar recibo" onclick="fecharRecibo()">&times;</button>
+        <div class="recibo-topo">
+            <div class="marca">Serviço particular</div>
+            <h3 id="tituloRecibo">Recibo de corrida</h3>
+        </div>
+        <div class="recibo-info">
+            <div class="recibo-linha"><span>Modalidade</span><strong id="reciboModalidade"></strong></div>
+            <div class="recibo-linha"><span>Distância / duração</span><strong id="reciboMedida"></strong></div>
+            <div class="recibo-linha"><span>Valor inicial</span><strong id="reciboInicial"></strong></div>
+            <div class="recibo-linha"><span>Tarifa aplicada</span><strong id="reciboTarifa"></strong></div>
+        </div>
+        <div class="recibo-total">
+            <span>Total da corrida</span>
+            <strong id="reciboTotal"></strong>
+        </div>
+        <p class="recibo-aviso">Obrigado pela preferência.</p>
+    </article>
+</div>
+
 <script>
+    function alternarCampos() {
+        const porHora = document.getElementById('tipoCorrida').value === 'hora';
+        document.getElementById('campoKm').hidden = porHora;
+        document.getElementById('camposHorario').hidden = !porHora;
+        document.getElementById('labelValorVariavel').innerText = porHora
+            ? 'Valor por hora (R$)'
+            : 'Valor por km (R$)';
+        document.getElementById('valorVariavel').value = porHora ? '75' : '2.5';
+        document.getElementById('resultadoArea').classList.remove('show');
+    }
+
     function calcular() {
-        const liquido = parseFloat(document.getElementById('valorLiquido').value);
-        const taxa = parseFloat(document.getElementById('metodo').value);
+        const tipoCorrida = document.getElementById('tipoCorrida').value;
         const areaRes = document.getElementById('resultadoArea');
         const campoValor = document.getElementById('valorFinal');
+        const detalhes = document.getElementById('detalhesCalculo');
+        const valorInicial = parseFloat(document.getElementById('valorInicial').value);
+        const valorVariavel = parseFloat(document.getElementById('valorVariavel').value);
+        let total;
+        let medida;
 
-        if (isNaN(liquido) || liquido <= 0) {
-            alert("Por favor, digita um valor válido!");
+        if (isNaN(valorInicial) || valorInicial < 0 || isNaN(valorVariavel) || valorVariavel < 0) {
+            alert('Por favor, informa valores de cobrança válidos.');
             return;
         }
 
-        // Fórmula: Valor Bruto = Valor Líquido / (1 - Taxa)
-        const bruto = liquido / (1 - taxa);
+        if (tipoCorrida === 'km') {
+            const quilometros = parseFloat(document.getElementById('quilometros').value);
 
-        // Atualiza o texto e mostra com animação
-        campoValor.innerText = `R$ ${bruto.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            if (isNaN(quilometros) || quilometros <= 0) {
+                alert('Por favor, informa uma quantidade válida de quilômetros.');
+                return;
+            }
+
+            total = valorInicial + (quilometros * valorVariavel);
+            medida = `${quilometros.toLocaleString('pt-BR')} km`;
+            detalhes.innerText = `${quilometros.toLocaleString('pt-BR')} km x ${formatarMoeda(valorVariavel)}/km + ${formatarMoeda(valorInicial)}`;
+        } else {
+            const inicio = document.getElementById('horarioInicio').value;
+            const fim = document.getElementById('horarioFim').value;
+
+            if (!inicio || !fim) {
+                alert('Por favor, informa o horário de início e o horário final.');
+                return;
+            }
+
+            const [horaInicio, minutoInicio] = inicio.split(':').map(Number);
+            const [horaFim, minutoFim] = fim.split(':').map(Number);
+            const minutos = ((horaFim * 60) + minutoFim) - ((horaInicio * 60) + minutoInicio);
+
+            if (minutos <= 0) {
+                alert('O horário final deve ser depois do horário de início.');
+                return;
+            }
+
+            const horas = minutos / 60;
+            total = valorInicial + (horas * valorVariavel);
+            medida = `${formatarDuracao(minutos)} (${inicio} - ${fim})`;
+            detalhes.innerText = `${formatarDuracao(minutos)} x ${formatarMoeda(valorVariavel)}/h + ${formatarMoeda(valorInicial)}`;
+        }
+
+        campoValor.innerText = formatarMoeda(total);
         areaRes.classList.add('show');
+        document.getElementById('botaoRecibo').style.display = 'block';
+        areaRes.dataset.total = total;
+        areaRes.dataset.tipo = tipoCorrida;
+        areaRes.dataset.valorInicial = valorInicial;
+        areaRes.dataset.valorVariavel = valorVariavel;
+        areaRes.dataset.medida = medida;
+    }
+
+    function abrirRecibo() {
+        const areaRes = document.getElementById('resultadoArea');
+        const porHora = areaRes.dataset.tipo === 'hora';
+        document.getElementById('reciboModalidade').innerText = porHora ? 'Por hora' : 'Por quilômetro';
+        document.getElementById('reciboMedida').innerText = areaRes.dataset.medida;
+        document.getElementById('reciboInicial').innerText = formatarMoeda(Number(areaRes.dataset.valorInicial));
+        document.getElementById('reciboTarifa').innerText = `${formatarMoeda(Number(areaRes.dataset.valorVariavel))}/${porHora ? 'hora' : 'km'}`;
+        document.getElementById('reciboTotal').innerText = formatarMoeda(Number(areaRes.dataset.total));
+        document.getElementById('modalRecibo').classList.add('aberto');
+    }
+
+    function fecharRecibo(event) {
+        if (!event || event.target === event.currentTarget) {
+            document.getElementById('modalRecibo').classList.remove('aberto');
+        }
+    }
+
+    function formatarMoeda(valor) {
+        return `R$ ${valor.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    }
+
+    function formatarDuracao(minutos) {
+        const horas = Math.floor(minutos / 60);
+        const minutosRestantes = minutos % 60;
+        return `${horas}h${minutosRestantes.toString().padStart(2, '0')}min`;
     }
 </script>
 
